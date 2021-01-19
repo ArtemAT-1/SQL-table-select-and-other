@@ -1,5 +1,5 @@
 # SQL-table-select-and-other
 
-This repository stores created tables, queries, trigger and other items.
+This repository stores created script of tables, queries, trigger and other items.
 
-В данном репозитории хранятся созданные таблицы и запросы и другие элементы.
+В данном репозитории хранятся созданные скрипты таблиц, запросов и других элементов.
