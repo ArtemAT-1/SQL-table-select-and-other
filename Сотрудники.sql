@@ -2,7 +2,7 @@ create database SSAR1
 --use SSAR1
 
 create table fio(fio_id int identity(1,1) not null primary key, fio1 varchar(50))
-insert into [fio] values ('Àíäðååâ Àíäðåé Àíäðååâè÷'),('Ïåòðîâ Ïåòð Ïåòðîâè÷'),('Ñåðãååâ Ñåðãåé Ñåðãååâè÷')
+insert into [fio] values ('ÐÐ½Ð´Ñ€ÐµÐµÐ² ÐÐ½Ð´Ñ€ÐµÐ¹ ÐÐ½Ð´Ñ€ÐµÐµÐ²Ð¸Ñ‡'),('ÐŸÐµÑ‚Ñ€Ð¾Ð² ÐŸÐµÑ‚Ñ€ ÐŸÐµÑ‚Ñ€Ð¾Ð²Ð¸Ñ‡'),('Ð¡ÐµÑ€Ð³ÐµÐµÐ² Ð¡ÐµÑ€Ð³ÐµÐ¹ Ð¡ÐµÑ€Ð³ÐµÐµÐ²Ð¸Ñ‡')
 create table ee1(ss_id int identity(1,1) not null primary key,FIOid int foreign key references fio(fio_id),vhod datetime,vihod datetime)
 insert into [ee1] values
 ('1','2018-03-09 10:00:00','2018-03-09 11:30:00'),
@@ -18,13 +18,13 @@ insert into [ee1] values
 
 go
 delete from ee1 where datename(weekday,vhod) = 'Saturday' or datename(weekday,vhod) = 'Sunday' or CONVERT(time, vhod)='23:59:59'or CONVERT(time, vihod)='23:59:59' or ((vhod) > (vihod));
-print 'Íåäîïóñòèìûå çàïèñè óäàëåíû'
+print 'ÐÐµÐ´Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ñ‹Ðµ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ ÑƒÐ´Ð°Ð»ÐµÐ½Ñ‹'
 
 
 select fio1,vhod,vihod,CONVERT(time, vihod-vhod) 'chasi' from fio,ee1 where FIOid=fio_id
 
 
-select fio1, COUNT(fio_id) 'Êîëè÷åñòîâ îïîçäàíèé'
+select fio1, COUNT(fio_id) 'ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¾Ð¿Ð¾Ð·Ð´Ð°Ð½Ð¸Ð¹'
 from ee1,fio
 where FIOid=fio_id
 and (((CONVERT(time, vhod)>'09:00:00.000') and (CONVERT(time, vhod)<'13:00:00.000'))
@@ -33,7 +33,7 @@ or ((CONVERT(time, vhod)>'14:00:00.000') and (CONVERT(time, vhod)<'18:00:00.000'
 and convert(date, vhod) between '2018-09-03' and '2018-09-07'
 group by fio1
 
-select fio1, COUNT(fio_id) 'Êîëè÷åñòîâ îïîçäàíèé'
+select fio1, COUNT(fio_id) 'ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¾Ð¿Ð¾Ð·Ð´Ð°Ð½Ð¸Ð¹'
 from ee1,fio
 where FIOid=fio_id
 and (((CONVERT(time, vhod)>'09:00:00.000') and (CONVERT(time, vhod)<'13:00:00.000'))
