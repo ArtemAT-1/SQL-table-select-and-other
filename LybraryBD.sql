@@ -1,21 +1,21 @@
 create database ABL
 use ABL
 create table author(author_id int identity (1,1) not null primary key, authorname varchar(70))
-insert into [author] values ('М.А.Булгаков'),('Ф.М.Достоевский'),('Н.В.Гоголь')
+insert into [author] values ('Рњ.Рђ.Р‘СѓР»РіР°РєРѕРІ'),('Р¤.Рњ.Р”РѕСЃС‚РѕРµРІСЃРєРёР№'),('Рќ.Р’.Р“РѕРіРѕР»СЊ')
 
 create table reader(reader_id int identity (1,1) not null primary key, readername varchar(70))
-insert into [reader] values ('Андреев А.А.'),('Борисов Б.Б.'),('Владимиров В.В.'),('Ильин И.И.'),('Олегов О.О.')
+insert into [reader] values ('РђРЅРґСЂРµРµРІ Рђ.Рђ.'),('Р‘РѕСЂРёСЃРѕРІ Р‘.Р‘.'),('Р’Р»Р°РґРёРјРёСЂРѕРІ Р’.Р’.'),('РР»СЊРёРЅ Р.Р.'),('РћР»РµРіРѕРІ Рћ.Рћ.')
 
 create table publishing(publish_id int identity (1,1) NOT NULL primary key, publushingname varchar(50))
-insert into [publishing] values ('Эксмо'),('Лабиринт'),('Мир')
+insert into [publishing] values ('Р­РєСЃРјРѕ'),('Р›Р°Р±РёСЂРёРЅС‚'),('РњРёСЂ')
 
 create table book(book_id int identity(1,1) not null primary key, name varchar(50), publishid int foreign key references publishing(publish_id), year int, page int, pictures int, price money, exemplar int)
 insert into [book] values 
-('Белая гвардия','2', 2017, 200, 20, '200.00', 5),
-('Собачье сердце','3', 2017, 200, 20, '200.00', 5),
-('Мастер и Маргарита','2', 2017, 200, 20, '200.00', 5),
-('Идиот','1', 2018, 210, 25, '220.00', 6),
-('Ревизор','3', 2018, 210, 25, '220.00', 6)
+('Р‘РµР»Р°СЏ РіРІР°СЂРґРёСЏ','2', 2017, 200, 20, '200.00', 5),
+('РЎРѕР±Р°С‡СЊРµ СЃРµСЂРґС†Рµ','3', 2017, 200, 20, '200.00', 5),
+('РњР°СЃС‚РµСЂ Рё РњР°СЂРіР°СЂРёС‚Р°','2', 2017, 200, 20, '200.00', 5),
+('РРґРёРѕС‚','1', 2018, 210, 25, '220.00', 6),
+('Р РµРІРёР·РѕСЂ','3', 2018, 210, 25, '220.00', 6)
 
 create table author_book(ab_id int identity (1,1) not null primary key, booksid int foreign key references book(book_id),authorid int foreign key references author(author_id))
 insert into [author_book] values ('2','1'),('2','2'),('2','3'),('2','1'),('2','2')
@@ -37,22 +37,22 @@ insert into [issue] values
 
 go
 delete from issue where (dateissue) > (daterefund);
-print 'Недопустимые записи удалены'
+print 'РќРµРґРѕРїСѓСЃС‚РёРјС‹Рµ Р·Р°РїРёСЃРё СѓРґР°Р»РµРЅС‹'
 
---Запрос сколько всего выдавалось конкретных книг
-select name, COUNT(*) 'Всего'
+--Р—Р°РїСЂРѕСЃ СЃРєРѕР»СЊРєРѕ РІСЃРµРіРѕ РІС‹РґР°РІР°Р»РѕСЃСЊ РєРѕРЅРєСЂРµС‚РЅС‹С… РєРЅРёРі
+select name, COUNT(*) 'Р’СЃРµРіРѕ'
 from book,issue
 where bookid=book_id
 group by name
 
---Запрос сколько было выдано конкретных книг на данный момент
-select name, COUNT(*)'На данный момент'
+--Р—Р°РїСЂРѕСЃ СЃРєРѕР»СЊРєРѕ Р±С‹Р»Рѕ РІС‹РґР°РЅРѕ РєРѕРЅРєСЂРµС‚РЅС‹С… РєРЅРёРі РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
+select name, COUNT(*)'РќР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚'
 from book,issue
 where bookid=book_id and daterefund is null
 group by name, exemplar
 
---Запрос количества экземпляров конкретной книги в наличии
-select name, (exemplar-COUNT(*)) 'Количество экземпляров книг в наличии'
+--Р—Р°РїСЂРѕСЃ РєРѕР»РёС‡РµСЃС‚РІР° СЌРєР·РµРјРїР»СЏСЂРѕРІ РєРѕРЅРєСЂРµС‚РЅРѕР№ РєРЅРёРіРё РІ РЅР°Р»РёС‡РёРё
+select name, (exemplar-COUNT(*)) 'РљРѕР»РёС‡РµСЃС‚РІРѕ СЌРєР·РµРјРїР»СЏСЂРѕРІ РєРЅРёРі РІ РЅР°Р»РёС‡РёРё'
 from book,issue
 where bookid=book_id and daterefund is null
 --and daterefund NULL 
@@ -61,15 +61,15 @@ group by name, exemplar
 
 
 
---Запрос Самых злостных читателей
-select readername, count(*) 'Количество невозвращенных книг'
+--Р—Р°РїСЂРѕСЃ РЎР°РјС‹С… Р·Р»РѕСЃС‚РЅС‹С… С‡РёС‚Р°С‚РµР»РµР№
+select readername, count(*) 'РљРѕР»РёС‡РµСЃС‚РІРѕ РЅРµРІРѕР·РІСЂР°С‰РµРЅРЅС‹С… РєРЅРёРі'
 from reader,issue
 where reader_id=readerid and daterefund is null
 group by readername
 order by count(*) DESC
 
---Запрос Самых популярных авторов по количеству выдач за последние пять лет
-select authorname, count(*) 'Количество'
+--Р—Р°РїСЂРѕСЃ РЎР°РјС‹С… РїРѕРїСѓР»СЏСЂРЅС‹С… Р°РІС‚РѕСЂРѕРІ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РІС‹РґР°С‡ Р·Р° РїРѕСЃР»РµРґРЅРёРµ РїСЏС‚СЊ Р»РµС‚
+select authorname, count(*) 'РљРѕР»РёС‡РµСЃС‚РІРѕ'
 from author,author_book, book,issue
 where authorid=author_id and bookid=book_id and book_id=booksid and (dateissue between (GETDATE()-'1905-01-01 00:00:00.000') and GETDATE())
 group by authorname
