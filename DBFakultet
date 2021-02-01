@@ -1,0 +1,24 @@
+create database fakultet
+use fakultet
+create table department(idd int identity(1,1) primary key, department varchar(max));
+create table languages(id int identity(1,1) primary key, lang varchar(max));
+create table stag(idstag int identity(1,1) primary key, satg varchar(max));
+create table fio(fio_id int identity(1,1) primary key, fio varchar(max), stag_id int references stag(idstag));
+create table fiodep(idfd int identity(1,1) primary key, idfio int references fio(fio_id), iddep int references department(idd));
+create table fiolang(idfl int identity(1,1) primary key, idfio int references fio(fio_id), idlang int references languages(id));
+create table ee1(ss_id int identity(1,1) primary key, FIOid int references fio(fio_id), vhod datetime, vihod datetime);
+
+insert into [department] values ('department1');
+insert into [languages] values ('languages1');
+insert into [stag] values ('stag1');
+insert into [fio] values ('fio1',1);
+insert into [fiodep] values (1,1);
+insert into [fiolang] values (1,1);
+insert into [ee1] values (1, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+select * from department;
+select * from languages;
+select * from fio, stag where stag_id=idstag;
+select * from fiodep,fio,department where idfio=fio_id and iddep=idd;
+select * from fiolang,fio,languages where idfio=fio_id and idlang=id;
+select * from ee1,fio where FIOid=fio_id;
